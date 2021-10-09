@@ -15,9 +15,33 @@ import re
 traffic = st.checkbox('Traffic')
 if traffic == True:
     '''
-    #### JR
+    ## 東海道本線[豊橋～米原]
+    '''
+    url = 'https://transit.yahoo.co.jp/traininfo/detail/192/193/'
+    res = requests.get(url)
+    soup = BeautifulSoup(res.text, "html.parser")
+    nameJ = soup.select_one('h1').text
+    kosinJ = soup.find(class_='subText').text
+    infoJ = soup.select_one("#mdServiceStatus > dl > dt").text
+    st.write(kosinJ)
+    st.write(infoJ)
+    '''
+    #### JRホームページ
     '''
     st.markdown('https://traininfo.jr-central.co.jp/zairaisen/status_detail.html?line=10001&lang=ja', unsafe_allow_html=True)
+    st.write('')
+    '''
+    ## 名鉄名古屋本線
+    '''
+    url = 'https://transit.yahoo.co.jp/traininfo/detail/208/0/'
+    res = requests.get(url)
+    soup = BeautifulSoup(res.text, "html.parser")
+    nameM = soup.select_one('h1').text
+    kosinM = soup.find(class_='subText').text
+    infoM = soup.select_one("#mdServiceStatus > dl > dt").text
+    st.write(kosinM)
+    st.write(infoM)
+
 
     '''
     #### 名鉄バス
@@ -29,10 +53,6 @@ if traffic == True:
     '''
     st.markdown('https://www.jorudan.co.jp/norikae/', unsafe_allow_html=True)
 
-    '''
-    ###### 【予定】webスクレイピング →遅延情報取得 時刻表
-    ######
-    '''
 
 weather = st.checkbox('Weather')
 if weather == True:
