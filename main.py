@@ -130,7 +130,7 @@ if weather == True:
 
         st.write(title)
         st.write(comment)
-        st.write(’■’+ today)
+        st.write('■'+ today)
         st.image(icon_today)
         st.write('最高気温:'+ max_today +'　最低気温:'+ min_today)
         st.write('～6時：'+ today_p6 +'　～12時：'+ today_p12 +'　～18時：'+ today_p18 +'　～24時：'+ today_p24)
