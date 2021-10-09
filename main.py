@@ -26,7 +26,7 @@ if traffic == True:
     st.write(kosinJ)
     st.write(infoJ)
     '''
-    ##### ▶JR運行情報
+    ###### ▶JR運行情報
     '''
     st.markdown('https://traininfo.jr-central.co.jp/zairaisen/status_detail.html?line=10001&lang=ja', unsafe_allow_html=True)
     st.write('')
@@ -44,12 +44,12 @@ if traffic == True:
     st.write('')
 
     '''
-    ##### ▶名鉄バス
+    ###### ▶名鉄バス
     '''
     st.markdown('https://navi.meitetsu-bus.co.jp/mb/DepQR.aspx?p=320103000', unsafe_allow_html=True)
 
     '''
-    ##### ▶乗り換え案内
+    ###### ▶乗り換え案内
     '''
     st.markdown('https://www.jorudan.co.jp/norikae/', unsafe_allow_html=True)
 
