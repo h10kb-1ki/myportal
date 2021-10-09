@@ -78,12 +78,12 @@ if weather == True:
 
         st.write(title)
         st.write(comment)
-        st.write('■'+ today)
+        st.write('■ '+ today)
         st.image(icon_today)
         st.write('最高気温:'+ max_today +'　最低気温:'+ min_today)
         st.write('～6時：'+ today_p6 +'　～12時：'+ today_p12 +'　～18時：'+ today_p18 +'　～24時：'+ today_p24)
 
-        st.write('■明日の天気')
+        st.write('■ 明日の天気')
         st.image(icon_tomorrow)
         st.write('最高気温:'+ max_tomorrow +'　最低気温:'+ min_tomorrow)
         st.write('～6時：'+ tomorrow_p6 +'　～12時：'+ tomorrow_p12 +'　～18時：'+ tomorrow_p18 +'　～24時：'+ tomorrow_p24)
@@ -130,12 +130,12 @@ if weather == True:
 
         st.write(title)
         st.write(comment)
-        st.write('■'+ today)
+        st.write('■ '+ today)
         st.image(icon_today)
         st.write('最高気温:'+ max_today +'　最低気温:'+ min_today)
         st.write('～6時：'+ today_p6 +'　～12時：'+ today_p12 +'　～18時：'+ today_p18 +'　～24時：'+ today_p24)
 
-        st.write('■明日の天気')
+        st.write('■ 明日の天気')
         st.image(icon_tomorrow)
         st.write('最高気温:'+ max_tomorrow +'　最低気温:'+ min_tomorrow)
         st.write('～6時：'+ tomorrow_p6 +'　～12時：'+ tomorrow_p12 +'　～18時：'+ tomorrow_p18 +'　～24時：'+ tomorrow_p24)
