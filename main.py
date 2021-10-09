@@ -41,7 +41,7 @@ if traffic == True:
     infoM = soup.select_one("#mdServiceStatus > dl > dt").text
     st.write(kosinM)
     st.write(infoM)
-
+    st.write('')
 
     '''
     ##### ▶名鉄バス
