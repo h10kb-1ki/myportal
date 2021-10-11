@@ -195,7 +195,7 @@ if news == True:
                 title = titles[i].text
                 link = ref[i].attrs['href']
                 st.write(title)
-                st.write(f'---->{link}')
+                st.write(f'&emsp{link}')
 
 MyLib = st.checkbox('Library')
 if MyLib == True:
