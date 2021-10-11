@@ -166,24 +166,38 @@ if weather == True:
     st.markdown('https://tenki.jp/radar/map/', unsafe_allow_html=True)
 news = st.checkbox('NEWS')
 if news == True:
-    '''
-    ##### Yahoo! ニュース トピックス
-    ######
-    '''
-    url = 'https://www.yahoo.co.jp/'
-    r = requests.get(url)
-    soup = BeautifulSoup(r.text, 'html.parser')
-    elems = soup.find_all(href = re.compile('news.yahoo.co.jp/pickup'))
-    col1, col2 = st.columns(2)
-    for i in range(0, len(elems)):
-        # titleを取得
-        title = elems[i].text
-        with col1:
-            st.write(title)
-        # linkを取得
-        link = elems[i].attrs['href']
-        with col2:
-            st.write(link)
+    yahoo = st.checkbox('Yahoo! ニュース トピックス')
+    if yahoo == True:
+        url = 'https://www.yahoo.co.jp/'
+        r = requests.get(url)
+        soup = BeautifulSoup(r.text, 'html.parser')
+        elems = soup.find_all(href = re.compile('news.yahoo.co.jp/pickup'))
+        col1, col2 = st.columns(2)
+        for i in range(0, len(elems)):
+            # titleを取得
+            title = elems[i].text
+            with col1:
+                st.write(title)
+            # linkを取得
+            link = elems[i].attrs['href']
+            with col2:
+                st.write(link)
+    seiyaku = st.checkbox('製薬業界ニュース')
+    if seiyaku ==True:
+        url = 'https://answers.ten-navi.com/pharmanews/pharma_category/1/'
+        res = requests.get(url)
+        res.encoding = res.apparent_encoding
+        soup = BeautifulSoup(res.text, "html.parser")
+
+        titles = soup.find_all('h2')
+        tag = soup.find_all(class_='tag')
+        ref = soup.find_all('a', class_='clearfix')
+
+        for i in range(0, len(titles)):
+            if tag[i].text == 'ニュース解説':
+                title = titles[i].text
+                link = ref[i].attrs['href']
+                st.write(title + '\n' + f'▶{link}')
 
 MyLib = st.checkbox('Library')
 if MyLib == True:
