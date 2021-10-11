@@ -53,7 +53,7 @@ if traffic == True:
     '''
     st.markdown('https://www.jorudan.co.jp/norikae/', unsafe_allow_html=True)
 
-
+st.write('-----------------------------------------------------')
 weather = st.checkbox('Weather')
 if weather == True:
     nagoya = st.checkbox('名古屋市の天気')
@@ -164,6 +164,8 @@ if weather == True:
     ###### ▶雨雲レーダー
     '''
     st.markdown('https://tenki.jp/radar/map/', unsafe_allow_html=True)
+
+st.write('-----------------------------------------------------')
 news = st.checkbox('NEWS')
 if news == True:
     yahoo = st.checkbox('Yahoo! ニュース トピックス')
@@ -198,6 +200,8 @@ if news == True:
                 st.write(f'・{title}')
                 st.write(f'>{link}')
                 #st.write('')
+
+st.write('-----------------------------------------------------')                
 
 MyLib = st.checkbox('Library')
 if MyLib == True:
