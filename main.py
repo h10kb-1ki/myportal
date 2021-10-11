@@ -178,7 +178,7 @@ if news == True:
             st.write(f'・{title}')
             # linkを取得
             link = elems[i].attrs['href']
-            st.write(f'>>>{link}')
+            st.write(f'>{link}')
             st.write('')
     seiyaku = st.checkbox('製薬業界ニュース')
     if seiyaku ==True:
@@ -196,7 +196,7 @@ if news == True:
                 title = titles[i].text
                 link = ref[i].attrs['href']
                 st.write(f'・{title}')
-                st.write(f'>>>{link}')
+                st.write(f'>{link}')
                 st.write('')
 
 MyLib = st.checkbox('Library')
