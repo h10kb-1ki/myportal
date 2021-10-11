@@ -175,10 +175,11 @@ if news == True:
         for i in range(0, len(elems)):
             # titleを取得
             title = elems[i].text
-            st.write(title)
+            st.write(f'・{title}')
             # linkを取得
             link = elems[i].attrs['href']
-            st.write(f'---->{link}')
+            st.write(link)
+            st.write('')
     seiyaku = st.checkbox('製薬業界ニュース')
     if seiyaku ==True:
         url = 'https://answers.ten-navi.com/pharmanews/pharma_category/1/'
@@ -194,7 +195,8 @@ if news == True:
             if tag[i].text == 'ニュース解説':
                 title = titles[i].text
                 link = ref[i].attrs['href']
-                st.write(f'・{title}' + f'　{link}')
+                st.write(f'・{title}')
+                st.write(link)
                 st.write('')
 
 MyLib = st.checkbox('Library')
