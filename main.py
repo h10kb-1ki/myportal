@@ -194,8 +194,8 @@ if news == True:
             if tag[i].text == 'ニュース解説':
                 title = titles[i].text
                 link = ref[i].attrs['href']
-                st.write(title)
-                st.write(f'&emsp{link}')
+                st.write(f'・{title}' + f'　{link}')
+                st.write('')
 
 MyLib = st.checkbox('Library')
 if MyLib == True:
