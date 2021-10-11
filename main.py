@@ -172,16 +172,13 @@ if news == True:
         r = requests.get(url)
         soup = BeautifulSoup(r.text, 'html.parser')
         elems = soup.find_all(href = re.compile('news.yahoo.co.jp/pickup'))
-        col1, col2 = st.columns(2)
         for i in range(0, len(elems)):
             # titleを取得
             title = elems[i].text
-            with col1:
-                st.write(title)
+            st.write(title)
             # linkを取得
             link = elems[i].attrs['href']
-            with col2:
-                st.write(link)
+            st.write(f'---->{link}')
     seiyaku = st.checkbox('製薬業界ニュース')
     if seiyaku ==True:
         url = 'https://answers.ten-navi.com/pharmanews/pharma_category/1/'
@@ -197,7 +194,8 @@ if news == True:
             if tag[i].text == 'ニュース解説':
                 title = titles[i].text
                 link = ref[i].attrs['href']
-                st.write(title + '\n' + f'---->{link}')
+                st.write(title)
+                st.write(f'---->{link}')
 
 MyLib = st.checkbox('Library')
 if MyLib == True:
