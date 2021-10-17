@@ -2,11 +2,13 @@ import streamlit as st
 import requests
 from bs4 import BeautifulSoup
 import datetime
-
 from PIL import Image
 import io
-
 import re
+from pandas_datareader import data
+import pandas as pd
+from dateutil.relativedelta import relativedelta
+import mplfinance as mpf
 
 '''
 ## MyPortal
