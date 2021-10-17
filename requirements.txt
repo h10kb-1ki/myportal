@@ -5,3 +5,4 @@ Image
 matplotlib
 pandas
 mplfinance
+data
