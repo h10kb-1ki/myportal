@@ -200,9 +200,44 @@ if news == True:
                 st.write(f'・{title}')
                 st.write(f'>{link}')
                 #st.write('')
-
+                
 st.write('-----------------------------------------------------')                
+Finance = st.checkbox('Finance')
+if Finance == True:
+    st.set_option('deprecation.showPyplotGlobalUse', False)
 
+    df_dic = pd.read_excel('stooq_code.xlsx', header=0)
+    dic = df_dic.set_index('name')['stooq_code'].to_dict()
+    today = datetime.today()
+    start_point = st.selectbox('開始', ('1ヶ月前', '3ヶ月前', '半年前', '1年前', '任意'), index=1)
+    if start_point == '1ヶ月前':
+        start = today - relativedelta(months=1)
+    elif start_point == '3ヶ月前':
+        start = today - relativedelta(months=3)
+    elif start_point == '半年前':
+        start = today - relativedelta(months=6)
+    elif start_point == '1年前':
+        start = today - relativedelta(months=12) 
+    else:
+        start = st.date_input('開始')
+
+    end = st.date_input('終了')
+    company_name = st.selectbox('銘柄', df_dic['name'], index=11)
+    company_code = dic[company_name]
+
+    df = data.DataReader(company_code, 'stooq', start, end)
+    df = df.sort_values('Date', ascending=True)
+
+    display = st.checkbox('表示')
+    if display == True:
+        cs  = mpf.make_mpf_style(gridcolor="lightgray", facecolor="white", edgecolor="#202426", figcolor="white", 
+                rc={"xtick.color":"black", "xtick.labelsize":12, 
+                    "ytick.color":"black", "ytick.labelsize":12, 
+                    "axes.labelsize":15, "axes.labelcolor":"black"})
+        fig = mpf.plot(df, type='candle', volume=True, mav=(5, 25, 50), figratio=(12,4), style=cs)
+        st.pyplot(fig)
+    
+st.write('-----------------------------------------------------')                
 MyLib = st.checkbox('Library')
 if MyLib == True:
     '''
