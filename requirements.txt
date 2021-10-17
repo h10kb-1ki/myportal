@@ -4,6 +4,4 @@ datetime
 Image
 matplotlib
 pandas
-data
-relativedelta
 mplfinance
