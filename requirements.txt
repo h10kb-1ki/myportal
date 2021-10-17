@@ -5,4 +5,4 @@ Image
 matplotlib
 pandas
 mplfinance
-data
+pandas_datareader
