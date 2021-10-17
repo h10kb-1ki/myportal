@@ -207,9 +207,20 @@ st.write('-----------------------------------------------------')
 Finance = st.checkbox('Finance')
 if Finance == True:
     st.set_option('deprecation.showPyplotGlobalUse', False)
-
-    df_dic = pd.read_excel('stooq_code.xlsx', header=0)
-    dic = df_dic.set_index('name')['stooq_code'].to_dict()
+    dic = {'サントリー': '2587.JP',
+      'アサヒ': '2502.JP',
+      'キリン': '2503.JP',
+      'サッポロ': '2501.JP',
+      'タケダ': '4502.JP',
+      'アステラス': '4503.JP',
+      '大塚': '4578.JP',
+      '第一三共': '4568.JP',
+      'エーザイ': '4523.JP',
+      '中外': '4519.JP',
+      '大日本住友': '4506.JP',
+      '塩野義': '4507.JP',
+      '協和キリン': '4151.JP',
+      '小野薬品': '4528.JP'}
     today = datetime.today()
     start_point = st.selectbox('開始', ('1ヶ月前', '3ヶ月前', '半年前', '1年前', '任意'), index=1)
     if start_point == '1ヶ月前':
