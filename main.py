@@ -221,6 +221,7 @@ if Finance == True:
       '塩野義': '4507.JP',
       '協和キリン': '4151.JP',
       '小野薬品': '4528.JP'}
+    name = list(dic.keys())
     today = datetime.datetime.now()
     start_point = st.selectbox('開始', ('1ヶ月前', '3ヶ月前', '半年前', '1年前', '任意'), index=1)
     if start_point == '1ヶ月前':
@@ -235,7 +236,7 @@ if Finance == True:
         start = st.date_input('開始')
 
     end = st.date_input('終了')
-    company_name = st.selectbox('銘柄', df_dic['name'], index=11)
+    company_name = st.selectbox('銘柄', name, index=11)
     company_code = dic[company_name]
 
     df = data.DataReader(company_code, 'stooq', start, end)
