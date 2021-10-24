@@ -15,15 +15,9 @@ st.set_page_config(layout="wide")
 '''
 ## MyPortal
 '''
-menu_list = ['Top page', 'Traffic', 'Weather', 'NEWS', 'Finance', 'Hobby', 'Library']
-menu = st.sidebar.selectbox('Menu', menu_list)
-#button = st.sidebar.button('実行')
-#if button == True:
-if menu == 'Top page':
-    st.write('')
-    
-elif menu == 'Traffic':
-    st.subheader('交通情報')
+
+traffic = st.checkbox('Traffic')
+if traffic == True:
     '''
     #### 東海道本線[豊橋～米原]
     '''
@@ -63,8 +57,9 @@ elif menu == 'Traffic':
     '''
     st.markdown('https://www.jorudan.co.jp/norikae/', unsafe_allow_html=True)
 
-elif menu == 'Weather':
-    st.subheader('気象情報')
+st.write('-----------------------------------------------------')
+weather = st.checkbox('Weather')
+if weather == True:
     nagoya = st.checkbox('名古屋市の天気')
     if nagoya == True:
         url = 'https://weathernews.jp/onebox/35.140631/136.856940/q=%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%B8%82%E4%B8%AD%E5%B7%9D%E5%8C%BA&v=6e0846f392462de33f98b88b4ccdc67e48efadd56255e3c54a8f2bf8341c7f00&temp=c&lang=ja'
@@ -174,8 +169,9 @@ elif menu == 'Weather':
     '''
     st.markdown('https://tenki.jp/radar/map/', unsafe_allow_html=True)
 
-elif menu == 'NEWS':
-    st.subheader('ニュース')
+st.write('-----------------------------------------------------')
+news = st.checkbox('NEWS')
+if news == True:
     yahoo = st.checkbox('Yahoo! ニュース トピックス')
     if yahoo == True:
         url = 'https://www.yahoo.co.jp/'
@@ -208,23 +204,25 @@ elif menu == 'NEWS':
                 st.write(f'・{title}')
                 st.write(f'>{link}')
                 #st.write('')
-elif menu == 'Finance':
-    st.subheader('株情報')
+                
+st.write('-----------------------------------------------------')                
+Finance = st.checkbox('Finance')
+if Finance == True:
     st.set_option('deprecation.showPyplotGlobalUse', False)
     dic = {'サントリー': '2587.JP',
-    'アサヒ': '2502.JP',
-    'キリン': '2503.JP',
-    'サッポロ': '2501.JP',
-    'タケダ': '4502.JP',
-    'アステラス': '4503.JP',
-    '大塚': '4578.JP',
-    '第一三共': '4568.JP',
-    'エーザイ': '4523.JP',
-    '中外': '4519.JP',
-    '大日本住友': '4506.JP',
-    '塩野義': '4507.JP',
-    '協和キリン': '4151.JP',
-    '小野薬品': '4528.JP'}
+      'アサヒ': '2502.JP',
+      'キリン': '2503.JP',
+      'サッポロ': '2501.JP',
+      'タケダ': '4502.JP',
+      'アステラス': '4503.JP',
+      '大塚': '4578.JP',
+      '第一三共': '4568.JP',
+      'エーザイ': '4523.JP',
+      '中外': '4519.JP',
+      '大日本住友': '4506.JP',
+      '塩野義': '4507.JP',
+      '協和キリン': '4151.JP',
+      '小野薬品': '4528.JP'}
     name = list(dic.keys())
     today = datetime.datetime.now()
     start_point = st.selectbox('開始', ('1ヶ月前', '3ヶ月前', '半年前', '1年前', '任意'), index=2)
@@ -255,8 +253,9 @@ elif menu == 'Finance':
         fig = mpf.plot(df, type='candle', volume=True, mav=(5, 25, 50), figratio=(12,4), style=cs)
         st.pyplot(fig)
 
-elif menu == 'Hobby':
-    st.subheader('趣味')
+st.write('-----------------------------------------------------')  
+hobby = st.checkbox('Hobby')
+if hobby == True:
     '''
     ###### ▶colt python
     '''
@@ -265,10 +264,11 @@ elif menu == 'Hobby':
     '''
     ###### ▶世界は もっと 面白くていい！
     '''
-    st.markdown('https://twitter.com/k5dbzrmjne77i5r', unsafe_allow_html=True)
+    st.markdown('https://twitter.com/k5dbzrmjne77i5r', unsafe_allow_html=True)        
 
-elif menu == 'Library':
-    st.subheader('リンク集')
+st.write('-----------------------------------------------------')                
+MyLib = st.checkbox('Library')
+if MyLib == True:
     '''
     ###### ▶VCM血中濃度シミュレーション
     '''
