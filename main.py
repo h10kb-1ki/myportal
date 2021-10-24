@@ -10,6 +10,8 @@ import pandas as pd
 from dateutil.relativedelta import relativedelta
 import mplfinance as mpf
 
+st.set_page_config(layout="wide")
+
 '''
 ## MyPortal
 '''
