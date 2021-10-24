@@ -244,14 +244,12 @@ if Finance == True:
     df = data.DataReader(company_code, 'stooq', start, end)
     df = df.sort_values('Date', ascending=True)
 
-    display = st.checkbox('表示')
-    if display == True:
-        cs  = mpf.make_mpf_style(gridcolor="lightgray", facecolor="white", edgecolor="#202426", figcolor="white", 
-                rc={"xtick.color":"black", "xtick.labelsize":12, 
-                    "ytick.color":"black", "ytick.labelsize":12, 
-                    "axes.labelsize":15, "axes.labelcolor":"black"})
-        fig = mpf.plot(df, type='candle', volume=True, mav=(5, 25, 50), figratio=(12,4), style=cs)
-        st.pyplot(fig)
+    cs  = mpf.make_mpf_style(gridcolor="lightgray", facecolor="white", edgecolor="#202426", figcolor="white", 
+            rc={"xtick.color":"black", "xtick.labelsize":12, 
+                "ytick.color":"black", "ytick.labelsize":12, 
+                "axes.labelsize":15, "axes.labelcolor":"black"})
+    fig = mpf.plot(df, type='candle', volume=True, mav=(5, 25, 50), figratio=(12,4), style=cs)
+    st.pyplot(fig)
 
 st.write('-----------------------------------------------------')  
 hobby = st.checkbox('Hobby')
