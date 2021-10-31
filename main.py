@@ -23,14 +23,14 @@ if traffic == True:
     '''
     #### 東海道本線[豊橋～米原]
     '''
-    url = 'https://transit.yahoo.co.jp/traininfo/detail/192/193/'
-    res = requests.get(url)
-    soup = BeautifulSoup(res.text, "html.parser")
-    nameJ = soup.select_one('h1').text
-    kosinJ = soup.find(class_='subText').text
-    infoJ = soup.select_one("#mdServiceStatus > dl > dt").text
-    st.write(kosinJ)
-    st.write(infoJ)
+    #url = 'https://transit.yahoo.co.jp/traininfo/detail/192/193/'
+    #res = requests.get(url)
+    #soup = BeautifulSoup(res.text, "html.parser")
+    #nameJ = soup.select_one('h1').text
+    #kosinJ = soup.find(class_='subText').text
+    #infoJ = soup.select_one("#mdServiceStatus > dl > dt").text
+    #st.write(kosinJ)
+    #st.write(infoJ)
     '''
     ###### ▶JR運行情報
     '''
@@ -39,15 +39,14 @@ if traffic == True:
     '''
     #### 名鉄名古屋本線
     '''
-    url = 'https://transit.yahoo.co.jp/traininfo/detail/208/0/'
-    res = requests.get(url)
-    soup = BeautifulSoup(res.text, "html.parser")
-    nameM = soup.select_one('h1').text
-    kosinM = soup.find(class_='subText').text
-    infoM = soup.select_one("#mdServiceStatus > dl > dt").text
-    st.write(kosinM)
-    st.write(infoM)
-    st.write('')
+    #url = 'https://transit.yahoo.co.jp/traininfo/detail/208/0/'
+    #res = requests.get(url)
+    #soup = BeautifulSoup(res.text, "html.parser")
+    #kosinM = soup.find(class_='subText').text
+    #infoM = soup.select_one("#mdServiceStatus > dl > dt").text
+    #st.write(kosinM)
+    #st.write(infoM)
+    #st.write('')
 
     '''
     ###### ▶名鉄バス
