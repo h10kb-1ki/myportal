@@ -6,3 +6,5 @@ matplotlib
 pandas
 mplfinance
 pandas_datareader
+altair
+openpyxl
