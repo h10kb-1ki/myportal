@@ -9,6 +9,8 @@ from pandas_datareader import data
 import pandas as pd
 from dateutil.relativedelta import relativedelta
 import mplfinance as mpf
+import altair as alt
+import openpyxl as xl
 
 st.set_page_config(layout="wide")
 
@@ -284,3 +286,50 @@ if MyLib == True:
     ###### ▶一郎の部屋
     '''
     st.markdown('https://sites.google.com/view/tdmichiro/%E3%83%9B%E3%83%BC%E3%83%A0', unsafe_allow_html=True)
+    
+    kampo = st.checkbox('漢方比較')
+    if kampo == True:
+        wb = xl.load_workbook('kampo.xlsx')
+        ws = []
+        for i in wb.worksheets:
+            ws.append(i.title)
+
+        df = pd.read_excel('kampo.xlsx', sheet_name=ws[0], header=0)
+        for j in range(1, len(ws)):
+            df_sheet = pd.read_excel('kampo.xlsx', sheet_name=ws[j], header=0)
+            df = pd.merge(df, df_sheet, on='組成', how='outer')
+
+        df = df.melt(id_vars='組成')
+        df = df.sort_values('variable')
+        kampo_list = list(df['variable'].unique())
+
+        st.title('漢方：含有生薬の比較')
+        st.write('ツムラ製品7.5g中の生薬含有量を表示')
+        selection = st.multiselect('漢方を選択', kampo_list)
+        df = df[(df['variable'].isin(selection))]
+        df = df.rename(columns={'variable':'漢方薬'})
+
+        fig = alt.Chart(df).mark_rect().encode(
+            alt.X('漢方薬:N'),
+            alt.Y('組成:N', 
+                #scale=alt.Scale(paddingInner=0),
+                ),
+            alt.Color('value:Q', 
+                    scale=alt.Scale(scheme='blues'), 
+                    title='含有量', 
+                    )
+            )
+        text = fig.mark_text(baseline='middle').encode(
+            text='value:Q',
+            color=alt.condition(
+                alt.datum.value >0.1,
+                alt.value('black'),
+                alt.value('white'),
+                )
+            )
+        btn = st.button('表示')
+
+        if btn == True:
+            st.altair_chart(fig + text, 
+                #use_container_width=True
+                )
