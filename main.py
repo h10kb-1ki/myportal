@@ -268,7 +268,7 @@ if hobby == True:
     '''
     ###### ▶Pep Up
     '''
-    st.markdown('https://pepup.life/activities', unsafe_allow_html=True)
+    st.markdown('https://pepup.life/home', unsafe_allow_html=True)
 
 st.write('-----------------------------------------------------')                
 MyLib = st.checkbox('Library')
