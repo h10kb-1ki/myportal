@@ -8,3 +8,6 @@ mplfinance
 pandas_datareader
 altair
 openpyxl
+seaborn
+matplotlib
+japanize_matplotlib
