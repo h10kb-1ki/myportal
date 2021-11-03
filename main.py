@@ -253,7 +253,7 @@ if Finance == True:
     st.pyplot(fig)
 
 st.write('-----------------------------------------------------')  
-hobby = st.checkbox('Hobby')
+hobby = st.checkbox('Hobby & Health')
 if hobby == True:
     '''
     ###### ▶colt python
@@ -263,7 +263,12 @@ if hobby == True:
     '''
     ###### ▶世界は もっと 面白くていい！
     '''
-    st.markdown('https://twitter.com/k5dbzrmjne77i5r', unsafe_allow_html=True)        
+    st.markdown('https://twitter.com/k5dbzrmjne77i5r', unsafe_allow_html=True)
+    
+    '''
+    ###### ▶Pep Up
+    '''
+    st.markdown('https://pepup.life/activities', unsafe_allow_html=True)
 
 st.write('-----------------------------------------------------')                
 MyLib = st.checkbox('Library')
