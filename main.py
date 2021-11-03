@@ -301,7 +301,7 @@ if MyLib == True:
         for i in wb.worksheets:
             ws.append(i.title)
 
-        df = pd.read_excel('kampo.xlsx', sheet_name=ws[0], header=0)
+        df = pd.read_excel('kampo.xlsx', sheet_name=ws[0], header=0, index_col=0)
         for j in range(1, len(ws)):
             df_sheet = pd.read_excel('kampo.xlsx', sheet_name=ws[j], header=0, index_col=0)
             df = df.merge(df_sheet, how='outer', left_index=True, right_index=True)
