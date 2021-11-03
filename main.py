@@ -11,6 +11,9 @@ from dateutil.relativedelta import relativedelta
 import mplfinance as mpf
 import altair as alt
 import openpyxl as xl
+import seaborn as sns
+import matplotlib.pyplot as plt
+import japanize_matplotlib
 
 st.set_page_config(layout="wide")
 
@@ -300,40 +303,21 @@ if MyLib == True:
 
         df = pd.read_excel('kampo.xlsx', sheet_name=ws[0], header=0)
         for j in range(1, len(ws)):
-            df_sheet = pd.read_excel('kampo.xlsx', sheet_name=ws[j], header=0)
-            df = pd.merge(df, df_sheet, on='組成', how='outer')
-
-        df = df.melt(id_vars='組成')
-        df = df.sort_values('variable')
-        kampo_list = list(df['variable'].unique())
+            df_sheet = pd.read_excel('kampo.xlsx', sheet_name=ws[j], header=0, index_col=0)
+            df = df.merge(df_sheet, how='outer', left_index=True, right_index=True)
 
         st.title('漢方：含有生薬の比較')
-        st.write('ツムラ製品 1日量（通常量）中の生薬含有量を表示')
+        st.write('1日量（ツムラ製品、通常量）中の生薬含有量を表示')
+        kampo_list = sorted(df.columns)
         selection = st.multiselect('漢方を選択', kampo_list)
-        df = df[(df['variable'].isin(selection))]
-        df = df.rename(columns={'variable':'漢方薬'})
 
-        fig = alt.Chart(df).mark_rect().encode(
-            alt.X('漢方薬:N'),
-            alt.Y('組成:N', 
-                #scale=alt.Scale(paddingInner=0),
-                ),
-            alt.Color('value:Q', 
-                    scale=alt.Scale(scheme='blues'), 
-                    title='含有量', 
-                    )
-            )
-        text = fig.mark_text(baseline='middle').encode(
-            text='value:Q',
-            color=alt.condition(
-                alt.datum.value >0.1,
-                alt.value('black'),
-                alt.value('white'),
-                )
-            )
+        df = df[selection]
+        #空白行(Nan)を削除
+        df.dropna(subset=selection, how='all', inplace=True)
+        fig, ax = plt.subplots(1, 1, figsize=(12, 10))
+        ax = sns.heatmap(df, annot=True, fmt='.1f', cmap='Blues', vmax=10, vmin=0, ax=ax)
+
         btn = st.button('表示')
 
         if btn == True:
-            st.altair_chart(fig + text, 
-                #use_container_width=True
-                )
+            st.pyplot(fig)
