@@ -308,7 +308,7 @@ if MyLib == True:
         kampo_list = list(df['variable'].unique())
 
         st.title('漢方：含有生薬の比較')
-        st.write('ツムラ製品7.5g中の生薬含有量を表示')
+        st.write('ツムラ製品 1日量（通常量）中の生薬含有量を表示')
         selection = st.multiselect('漢方を選択', kampo_list)
         df = df[(df['variable'].isin(selection))]
         df = df.rename(columns={'variable':'漢方薬'})
