@@ -296,7 +296,6 @@ if MyLib:
     '''
     ###### ▶一郎の部屋
     '''
-    #coding: UTF-8
     st.markdown('https://sites.google.com/view/tdmichiro/%E3%83%9B%E3%83%BC%E3%83%A0', unsafe_allow_html=True)
     
     kampo = st.checkbox('漢方比較')
@@ -325,4 +324,5 @@ if MyLib:
         btn = st.button('表示')
 
         if btn == True:
-            st.pyplot(fig)
+            #st.pyplot(fig)
+            st.write('日本語対応に改修中')
