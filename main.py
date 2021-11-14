@@ -54,7 +54,7 @@ if traffic:
     ###### ▶名鉄（本線）運行情報
     '''
     st.markdown('https://top.meitetsu.co.jp/em/', unsafe_allow_html=True)
-    #st.write('')
+    st.write('')
 
     '''
     ###### ▶名鉄バス（安城駅発 更生病院行）
