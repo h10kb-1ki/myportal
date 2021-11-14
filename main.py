@@ -22,18 +22,18 @@ st.set_page_config(layout="wide")
 '''
 
 traffic = st.checkbox('Traffic')
-if traffic == True:
+if traffic:
     '''
     #### 東海道本線[豊橋～米原]
     '''
-    #url = 'https://transit.yahoo.co.jp/traininfo/detail/192/193/'
-    #res = requests.get(url)
-    #soup = BeautifulSoup(res.text, "html.parser")
-    #nameJ = soup.select_one('h1').text
-    #kosinJ = soup.find(class_='subText').text
-    #infoJ = soup.select_one("#mdServiceStatus > dl > dt").text
-    #st.write(kosinJ)
-    #st.write(infoJ)
+    url = 'https://transit.yahoo.co.jp/traininfo/detail/192/193/'
+    res = requests.get(url)
+    soup = BeautifulSoup(res.text, "html.parser")
+    statusJ = soup.find('dd', class_='normal')
+    if statusJ:
+        st.write(statusJ.text)
+    else:
+        st.write('***遅延あり***')
     '''
     ###### ▶JR運行情報
     '''
@@ -42,17 +42,21 @@ if traffic == True:
     '''
     #### 名鉄名古屋本線
     '''
-    #url = 'https://transit.yahoo.co.jp/traininfo/detail/208/0/'
-    #res = requests.get(url)
-    #soup = BeautifulSoup(res.text, "html.parser")
-    #kosinM = soup.find(class_='subText').text
-    #infoM = soup.select_one("#mdServiceStatus > dl > dt").text
-    #st.write(kosinM)
-    #st.write(infoM)
+    url = 'https://transit.yahoo.co.jp/traininfo/detail/208/0/'
+    res = requests.get(url)
+    soup = BeautifulSoup(res.text, "html.parser")
+    statusM = soup.find('dd', class_='normal')
+    if statusM:
+        st.write(statusM.text)
+    else:
+        st.write('***遅延あり***')
+    ###### ▶名鉄（本線）運行情報
+    '''
+    st.markdown('https://top.meitetsu.co.jp/em/', unsafe_allow_html=True)
     #st.write('')
 
     '''
-    ###### ▶名鉄バス
+    ###### ▶名鉄バス（安城駅発 更生病院行）
     '''
     st.markdown('https://navi.meitetsu-bus.co.jp/mb/DepQR.aspx?p=320103000', unsafe_allow_html=True)
 
@@ -63,7 +67,7 @@ if traffic == True:
 
 st.write('-----------------------------------------------------')
 weather = st.checkbox('Weather')
-if weather == True:
+if weather:
     nagoya = st.checkbox('名古屋市の天気')
     if nagoya == True:
         url = 'https://weathernews.jp/onebox/35.140631/136.856940/q=%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%B8%82%E4%B8%AD%E5%B7%9D%E5%8C%BA&v=6e0846f392462de33f98b88b4ccdc67e48efadd56255e3c54a8f2bf8341c7f00&temp=c&lang=ja'
@@ -175,7 +179,7 @@ if weather == True:
 
 st.write('-----------------------------------------------------')
 news = st.checkbox('NEWS')
-if news == True:
+if news:
     yahoo = st.checkbox('Yahoo! ニュース トピックス')
     if yahoo == True:
         url = 'https://www.yahoo.co.jp/'
@@ -211,7 +215,7 @@ if news == True:
                 
 st.write('-----------------------------------------------------')                
 Finance = st.checkbox('Finance')
-if Finance == True:
+if Finance:
     st.set_option('deprecation.showPyplotGlobalUse', False)
     dic = {'サントリー': '2587.JP',
       'アサヒ': '2502.JP',
@@ -257,7 +261,7 @@ if Finance == True:
 
 st.write('-----------------------------------------------------')  
 hobby = st.checkbox('Hobby & Health')
-if hobby == True:
+if hobby:
     '''
     ###### ▶colt python
     '''
@@ -275,7 +279,7 @@ if hobby == True:
 
 st.write('-----------------------------------------------------')                
 MyLib = st.checkbox('Library')
-if MyLib == True:
+if MyLib:
     '''
     ###### ▶VCM血中濃度シミュレーション
     '''
