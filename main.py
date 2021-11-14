@@ -55,7 +55,8 @@ if traffic:
     '''
     st.markdown('https://top.meitetsu.co.jp/em/', unsafe_allow_html=True)
     st.write('')
-
+    st.write('')
+    
     '''
     ###### ▶名鉄バス（安城駅発 更生病院行）
     '''
