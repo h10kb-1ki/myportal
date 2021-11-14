@@ -50,6 +50,7 @@ if traffic:
         st.write(statusM.text)
     else:
         st.write('***遅延あり***')
+    '''
     ###### ▶名鉄（本線）運行情報
     '''
     st.markdown('https://top.meitetsu.co.jp/em/', unsafe_allow_html=True)
