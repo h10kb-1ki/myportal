@@ -316,7 +316,6 @@ if MyLib:
         selection = st.multiselect('漢方を選択', kampo_list)
 
         df = df[selection]
-        #空白行(Nan)を削除
         df.dropna(subset=selection, how='all', inplace=True)
         fig, ax = plt.subplots(1, 1, figsize=(12, 10))
         ax = sns.heatmap(df, annot=True, fmt='.1f', cmap='Blues', vmax=10, vmin=0, ax=ax)
@@ -324,5 +323,4 @@ if MyLib:
         btn = st.button('表示')
 
         if btn == True:
-            #st.pyplot(fig)
-            st.write('日本語対応に改修中')
+            st.pyplot(fig)
