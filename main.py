@@ -28,7 +28,7 @@ if ToDo:
     f.close()
     txt = st.text_area(
         '【ASAP】As soos as possible!', 
-        #value=data, 
+        value=data, 
         height=200, 
         )
     btn1 = st.button('Save "ASAP"')
