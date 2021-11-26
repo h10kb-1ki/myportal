@@ -35,7 +35,7 @@ if ToDo:
         )
     btn1 = st.button('Save "ASAP"')
     if btn1:
-        f = open('asap.txt', 'w', encoding='shift-jis')
+        f = open('asap.txt', 'w')
         f.write(txt)
         f.close()
 
