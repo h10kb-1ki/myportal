@@ -21,6 +21,38 @@ st.set_page_config(layout="wide")
 ## MyPortal
 '''
 
+ToDo = st.checkbox('ToDo')
+if ToDo:
+    f = open('asap.txt', 'r')
+    data = f.read()
+    f.close()
+    txt = st.text_area(
+        '【ASAP】As soos as possible!', 
+        value=data, 
+        height=200, 
+        )
+    btn1 = st.button('Save "ASAP"')
+    if btn1:
+        f = open('asap.txt', 'w')
+        f.write(txt)
+        f.close()
+
+    st.write('--------------------------')
+    f = open('later.txt', 'r')
+    data = f.read()
+    f.close()
+    txt = st.text_area(
+        '【Later】You can do it later.', 
+        value=data, 
+        height=200, 
+        )
+    btn2 = st.button('Save "Later"')
+    if btn2:
+        f = open('later.txt', 'w')
+        f.write(txt)
+        f.close() 
+
+st.write('-----------------------------------------------------')
 traffic = st.checkbox('Traffic')
 if traffic:
     '''
