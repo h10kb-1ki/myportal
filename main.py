@@ -16,7 +16,7 @@ import matplotlib.pyplot as plt
 import japanize_matplotlib
 
 @st.cache(allow_output_mutation=True)
-st.set_page_config(layout="wide")
+#st.set_page_config(layout="wide")
 
 '''
 ## MyPortal
