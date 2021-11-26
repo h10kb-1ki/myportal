@@ -23,7 +23,7 @@ st.set_page_config(layout="wide")
 
 ToDo = st.checkbox('ToDo')
 if ToDo:
-    f = open('asap.txt', 'r', encoding='cp932')
+    f = open('asap.txt', 'r', encoding='shift-jis')
     data = f.read()
     f.close()
     txt = st.text_area(
@@ -33,12 +33,12 @@ if ToDo:
         )
     btn1 = st.button('Save "ASAP"')
     if btn1:
-        f = open('asap.txt', 'w')
+        f = open('asap.txt', 'w', encoding='shift-jis')
         f.write(txt)
         f.close()
 
     st.write('--------------------------')
-    f = open('later.txt', 'r', encoding='cp932')
+    f = open('later.txt', 'r', encoding='shift-jis')
     data = f.read()
     f.close()
     txt = st.text_area(
@@ -48,7 +48,7 @@ if ToDo:
         )
     btn2 = st.button('Save "Later"')
     if btn2:
-        f = open('later.txt', 'w')
+        f = open('later.txt', 'w', encoding='shift-jis')
         f.write(txt)
         f.close() 
 
