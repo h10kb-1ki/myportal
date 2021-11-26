@@ -23,7 +23,7 @@ st.set_page_config(layout="wide")
 
 ToDo = st.checkbox('ToDo')
 if ToDo:
-    f = open('asap.txt', 'r')
+    f = open('asap.txt', 'r', encoding='utf-8')
     data = f.read()
     f.close()
     txt = st.text_area(
