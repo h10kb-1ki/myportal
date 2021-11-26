@@ -23,34 +23,52 @@ st.set_page_config(layout="wide")
 
 ToDo = st.checkbox('ToDo')
 if ToDo:
-    f = open('asap.txt', 'r', encoding='shift-jis')
-    data = f.read()
-    f.close()
-    txt = st.text_area(
-        '【ASAP】As soos as possible!', 
-        value=data, 
-        height=200, 
-        )
-    btn1 = st.button('Save "ASAP"')
-    if btn1:
-        f = open('asap.txt', 'w', encoding='shift-jis')
-        f.write(txt)
-        f.close()
+    '''
+    #### ToDo List
+    '''
+    df = pd.read_excel('ToDoList.xlsx', header=0)
+    col1, col2, col3 = st.columns([1, 6, 30])
 
-    st.write('--------------------------')
-    f = open('later.txt', 'r', encoding='shift-jis')
-    data = f.read()
-    f.close()
-    txt = st.text_area(
-        '【Later】You can do it later.', 
-        value=data, 
-        height=200, 
-        )
-    btn2 = st.button('Save "Later"')
-    if btn2:
-        f = open('later.txt', 'w', encoding='shift-jis')
-        f.write(txt)
-        f.close() 
+    df = df.sort_values('締切り')
+    for i in range(0, len(df)):
+        naiyou= df.iat[i, 0]
+        shimekiri = df.iat[i, 1]
+        juyodo = df.iat[i, 2]
+        with col2:
+            st.write(str(shimekiri) + ' ' + str(juyodo))
+        with col3:
+            st.write(naiyou)
+
+    st.write('')
+
+    '''
+    ##### 編集オプション
+    '''
+    if st.checkbox('新規登録'):
+        body = st.text_input('内容')
+        dead_line = st.date_input('締切り')
+        importance = st.selectbox('重要度', ('||||||||', '||||', '||', '|', ''), index=4)
+        if st.button('追加'):
+            if body == '':
+                st.write('空欄が残っています')
+            elif dead_line == '':
+                st.write('空欄が残っています')
+            elif importance == '':
+                st.write('空欄が残っています')
+            else:
+                df = df.append({'内容':body, '締切り':dead_line.strftime("%y/%m/%d"), '重要度':importance}, ignore_index=True)
+                df.to_excel('ToDoList.xlsx', index=False)
+                st.write('変更を保存しました')
+                st.write('チェックボックスを外してください')
+
+    if st.checkbox('削除'):
+        st.dataframe(df, width=500)
+        num = st.selectbox('削除するindex番号を指定', range(0, len(df)))
+        if st.button('削除'):
+            df = df.drop(df.index[num])
+            df.to_excel('ToDoList.xlsx', index=False)
+            st.write('変更を保存しました')
+            st.write('チェックボックスを外してください')
 
 st.write('-----------------------------------------------------')
 traffic = st.checkbox('Traffic')
