@@ -23,12 +23,14 @@ st.set_page_config(layout="wide")
 
 ToDo = st.checkbox('ToDo')
 if ToDo:
+    """
     f = open('asap.txt', 'r', encoding='shift-jis')
     data = f.read()
     f.close()
+    """
     txt = st.text_area(
         '【ASAP】As soos as possible!', 
-        value=data, 
+        #value=data, 
         height=200, 
         )
     btn1 = st.button('Save "ASAP"')
