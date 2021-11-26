@@ -23,7 +23,7 @@ st.set_page_config(layout="wide")
 
 ToDo = st.checkbox('ToDo')
 if ToDo:
-    f = open('asap.txt', 'r', encoding='utf-8')
+    f = open('asap.txt', 'r', encoding="shift-jis")
     data = f.read()
     f.close()
     txt = st.text_area(
@@ -38,7 +38,7 @@ if ToDo:
         f.close()
 
     st.write('--------------------------')
-    f = open('later.txt', 'r')
+    f = open('later.txt', 'r', encoding="shift-jis")
     data = f.read()
     f.close()
     txt = st.text_area(
