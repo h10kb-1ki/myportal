@@ -20,56 +20,6 @@ st.set_page_config(layout="wide")
 '''
 ## MyPortal
 '''
-
-ToDo = st.checkbox('ToDo')
-if ToDo:
-    '''
-    #### ToDo List
-    '''
-    df = pd.read_excel('ToDoList.xlsx', header=0)
-    col1, col2, col3 = st.columns([1, 6, 30])
-
-    df = df.sort_values('締切り')
-    for i in range(0, len(df)):
-        naiyou= df.iat[i, 0]
-        shimekiri = df.iat[i, 1]
-        juyodo = df.iat[i, 2]
-        with col2:
-            st.write(str(shimekiri) + ' ' + str(juyodo))
-        with col3:
-            st.write(naiyou)
-
-    st.write('')
-
-    '''
-    ##### 編集オプション
-    '''
-    if st.checkbox('新規登録'):
-        body = st.text_input('内容')
-        dead_line = st.date_input('締切り')
-        importance = st.selectbox('重要度', ('||||||||', '||||', '||', '|', ''), index=4)
-        if st.button('追加'):
-            if body == '':
-                st.write('空欄が残っています')
-            elif dead_line == '':
-                st.write('空欄が残っています')
-            elif importance == '':
-                st.write('空欄が残っています')
-            else:
-                df = df.append({'内容':body, '締切り':dead_line.strftime("%y/%m/%d"), '重要度':importance}, ignore_index=True)
-                df.to_excel('ToDoList.xlsx', index=False)
-                st.write('変更を保存しました')
-                st.write('チェックボックスを外してください')
-
-    if st.checkbox('削除'):
-        st.dataframe(df, width=500)
-        num = st.selectbox('削除するindex番号を指定', range(0, len(df)))
-        if st.button('削除'):
-            df = df.drop(df.index[num])
-            df.to_excel('ToDoList.xlsx', index=False)
-            st.write('変更を保存しました')
-            st.write('チェックボックスを外してください')
-
 st.write('-----------------------------------------------------')
 traffic = st.checkbox('Traffic')
 if traffic:
@@ -122,39 +72,71 @@ weather = st.checkbox('Weather')
 if weather:
     nagoya = st.checkbox('名古屋市の天気')
     if nagoya == True:
+        url = 'https://weathernews.jp/onebox/35.152529/136.914405/q=%E6%84%9B%E7%9F%A5%E7%9C%8C%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%B8%82&v=ba36a0768da9ec39827acda9415897ef0bccf54cffef6b80c06e56abca48ad88&temp=c&lang=ja'
+        res = requests.get(url)
+        res.encoding = res.apparent_encoding
+        soup = BeautifulSoup(res.text, "html.parser")
+
+        day_ = soup.find_all(class_='wTable__item')
+        today = day_[6].text
+        kion = soup.find_all(class_='text wTable__item')
+        temp_list = []
+        for i in range(0, 4):
+            temp = kion[i].text
+            temp_list.append(temp)
+        kakuritu = soup.find_all(class_='text')
+        P_today = []
+        for i in range(3, 7):
+            P_today.append(kakuritu[i].text)
+        P_tomorrow = []
+        for i in range(9, 13):
+            P_tomorrow.append(kakuritu[i].text)
+
+        icon = soup.find_all(class_='day2Table__item weather')
+        icon_today = 'https:' + icon[0].find('img').get('src')
+        icon_tomorrow = 'https:' + icon[1].find('img').get('src')
+        title = soup.find(class_='tit-02').text
+        info = soup.find(class_='comment no-ja')
+        comment = info.text
+        comment = comment.split('\n')[2]
+
+        st.write(title)
+        st.write(comment)
+        st.write('■ '+ today)
+        st.image(icon_today)
+        st.write('最高気温:'+ temp_list[0] +'　最低気温:'+ temp_list[1])
+        st.write('～6時：'+ P_today[0] +'　～12時：'+ P_today[1] +'　～18時：'+ P_today[2] +'　～24時：'+ P_today[3])
+
+        st.write('■ 明日の天気')
+        st.image(icon_tomorrow)
+        st.write('最高気温:'+ temp_list[2] +'　最低気温:'+ temp_list[3])
+        st.write('～6時：'+ P_tomorrow[0] +'　～12時：'+ P_tomorrow[1] +'　～18時：'+ P_tomorrow[2] +'　～24時：'+ P_tomorrow[3])
+
+    anjo = st.checkbox('安城市の天気')
+    if anjo == True:
         url = 'https://weathernews.jp/onebox/35.140631/136.856940/q=%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%B8%82%E4%B8%AD%E5%B7%9D%E5%8C%BA&v=6e0846f392462de33f98b88b4ccdc67e48efadd56255e3c54a8f2bf8341c7f00&temp=c&lang=ja'
         res = requests.get(url)
         res.encoding = res.apparent_encoding
         soup = BeautifulSoup(res.text, "html.parser")
 
-        #日付の取得（webページ上から）
         day_ = soup.find_all(class_='wTable__item')
         today = day_[6].text
-
-        #最高・最低気温の取得
         kion = soup.find_all(class_='text wTable__item')
-        max_today = kion[0].text
-        min_today = kion[1].text
-        max_tomorrow = kion[2].text
-        min_tomorrow = kion[3].text
-
-        #時間ごとの降水確率の取得
+        temp_list = []
+        for i in range(0, 4):
+            temp = kion[i].text
+            temp_list.append(temp)
         kakuritu = soup.find_all(class_='text')
-        today_p6 = kakuritu[2].text
-        today_p12 = kakuritu[3].text
-        today_p18 = kakuritu[4].text
-        today_p24 = kakuritu[5].text
-        tomorrow_p6 = kakuritu[8].text
-        tomorrow_p12 = kakuritu[9].text
-        tomorrow_p18 = kakuritu[10].text
-        tomorrow_p24 = kakuritu[11].text
+        P_today = []
+        for i in range(3, 7):
+            P_today.append(kakuritu[i].text)
+        P_tomorrow = []
+        for i in range(9, 13):
+            P_tomorrow.append(kakuritu[i].text)
 
-        #イメージアイコンの取得
         icon = soup.find_all(class_='day2Table__item weather')
         icon_today = 'https:' + icon[0].find('img').get('src')
         icon_tomorrow = 'https:' + icon[1].find('img').get('src')
-
-        #解説コメントの取得
         title = soup.find(class_='tit-02').text
         info = soup.find(class_='comment no-ja')
         comment = info.text
@@ -164,65 +146,13 @@ if weather:
         st.write(comment)
         st.write('■ '+ today)
         st.image(icon_today)
-        st.write('最高気温:'+ max_today +'　最低気温:'+ min_today)
-        st.write('～6時：'+ today_p6 +'　～12時：'+ today_p12 +'　～18時：'+ today_p18 +'　～24時：'+ today_p24)
+        st.write('最高気温:'+ temp_list[0] +'　最低気温:'+ temp_list[1])
+        st.write('～6時：'+ P_today[0] +'　～12時：'+ P_today[1] +'　～18時：'+ P_today[2] +'　～24時：'+ P_today[3])
 
         st.write('■ 明日の天気')
         st.image(icon_tomorrow)
-        st.write('最高気温:'+ max_tomorrow +'　最低気温:'+ min_tomorrow)
-        st.write('～6時：'+ tomorrow_p6 +'　～12時：'+ tomorrow_p12 +'　～18時：'+ tomorrow_p18 +'　～24時：'+ tomorrow_p24)
-
-    anjo = st.checkbox('安城市の天気')
-    if anjo == True:
-        url = 'https://weathernews.jp/onebox/34.948663/137.079025/q=%E6%84%9B%E7%9F%A5%E7%9C%8C%E5%AE%89%E5%9F%8E%E5%B8%82&v=3fa1edac9382759435af39576ac457ebaf29245456fafb5ff44b458182f4cbbc&temp=c&lang=ja'
-        res = requests.get(url)
-        res.encoding = res.apparent_encoding
-        soup = BeautifulSoup(res.text, "html.parser")
-
-        #日付の取得（webページ上から）
-        day_ = soup.find_all(class_='wTable__item')
-        today = day_[6].text
-
-        #最高・最低気温の取得
-        kion = soup.find_all(class_='text wTable__item')
-        max_today = kion[0].text
-        min_today = kion[1].text
-        max_tomorrow = kion[2].text
-        min_tomorrow = kion[3].text
-
-        #時間ごとの降水確率の取得
-        kakuritu = soup.find_all(class_='text')
-        today_p6 = kakuritu[2].text
-        today_p12 = kakuritu[3].text
-        today_p18 = kakuritu[4].text
-        today_p24 = kakuritu[5].text
-        tomorrow_p6 = kakuritu[8].text
-        tomorrow_p12 = kakuritu[9].text
-        tomorrow_p18 = kakuritu[10].text
-        tomorrow_p24 = kakuritu[11].text
-
-        #イメージアイコンの取得
-        icon = soup.find_all(class_='day2Table__item weather')
-        icon_today = 'https:' + icon[0].find('img').get('src')
-        icon_tomorrow = 'https:' + icon[1].find('img').get('src')
-
-        #解説コメントの取得
-        title = soup.find(class_='tit-02').text
-        info = soup.find(class_='comment no-ja')
-        comment = info.text
-        comment = comment.split('\n')[2]
-
-        st.write(title)
-        st.write(comment)
-        st.write('■ '+ today)
-        st.image(icon_today)
-        st.write('最高気温:'+ max_today +'　最低気温:'+ min_today)
-        st.write('～6時：'+ today_p6 +'　～12時：'+ today_p12 +'　～18時：'+ today_p18 +'　～24時：'+ today_p24)
-
-        st.write('■ 明日の天気')
-        st.image(icon_tomorrow)
-        st.write('最高気温:'+ max_tomorrow +'　最低気温:'+ min_tomorrow)
-        st.write('～6時：'+ tomorrow_p6 +'　～12時：'+ tomorrow_p12 +'　～18時：'+ tomorrow_p18 +'　～24時：'+ tomorrow_p24)
+        st.write('最高気温:'+ temp_list[2] +'　最低気温:'+ temp_list[3])
+        st.write('～6時：'+ P_tomorrow[0] +'　～12時：'+ P_tomorrow[1] +'　～18時：'+ P_tomorrow[2] +'　～24時：'+ P_tomorrow[3])
 
     '''
     ###### ▶雨雲レーダー
