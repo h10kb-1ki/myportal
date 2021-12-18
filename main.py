@@ -72,7 +72,7 @@ weather = st.checkbox('Weather')
 if weather:
     nagoya = st.checkbox('名古屋市の天気')
     if nagoya == True:
-        url = 'https://weathernews.jp/onebox/35.152529/136.914405/q=%E6%84%9B%E7%9F%A5%E7%9C%8C%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%B8%82&v=ba36a0768da9ec39827acda9415897ef0bccf54cffef6b80c06e56abca48ad88&temp=c&lang=ja'
+        url = 'https://weathernews.jp/onebox/35.140631/136.856940/q=%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%B8%82%E4%B8%AD%E5%B7%9D%E5%8C%BA&v=6e0846f392462de33f98b88b4ccdc67e48efadd56255e3c54a8f2bf8341c7f00&temp=c&lang=ja'
         res = requests.get(url)
         res.encoding = res.apparent_encoding
         soup = BeautifulSoup(res.text, "html.parser")
@@ -114,7 +114,7 @@ if weather:
 
     anjo = st.checkbox('安城市の天気')
     if anjo == True:
-        url = 'https://weathernews.jp/onebox/35.140631/136.856940/q=%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%B8%82%E4%B8%AD%E5%B7%9D%E5%8C%BA&v=6e0846f392462de33f98b88b4ccdc67e48efadd56255e3c54a8f2bf8341c7f00&temp=c&lang=ja'
+        url = 'https://weathernews.jp/onebox/34.948663/137.079025/q=%E6%84%9B%E7%9F%A5%E7%9C%8C%E5%AE%89%E5%9F%8E%E5%B8%82&v=3fa1edac9382759435af39576ac457ebaf29245456fafb5ff44b458182f4cbbc&temp=c&lang=ja'
         res = requests.get(url)
         res.encoding = res.apparent_encoding
         soup = BeautifulSoup(res.text, "html.parser")
